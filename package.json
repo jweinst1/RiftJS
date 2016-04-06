@@ -1,0 +1,26 @@
+{
+  "name": "riftjs",
+  "version": "1.0.0",
+  "description": "The JavaScript Array transformed.",
+  "main": "Main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jweinst1/RiftJS.git"
+  },
+  "keywords": [
+    "collectiontype",
+    "array",
+    "object",
+    "data",
+    "utils"
+  ],
+  "author": "Joshua Weinstein <jweinst1@berkeley.edu> (https://github.com/jweinst1)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jweinst1/RiftJS/issues"
+  },
+  "homepage": "https://github.com/jweinst1/RiftJS#readme"
+}

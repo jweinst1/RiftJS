@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
 * Main File for Rift JS*/
 
@@ -208,3 +210,6 @@ var Rift = (function () {
     };
     return Rift;
 })();
+
+exports.Rift = Rift;
+
