@@ -200,7 +200,7 @@ var Rift = (function () {
     };
     /*Prints all ordered elements in the collection*/
     Rift.prototype.printOrdered = function() {
-        for(var i=0;i<this.collction.length;i++) {
+        for(var i=0;i<this.collection.length;i++) {
             console.log(this.collection[i]);
         }
     };
