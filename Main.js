@@ -56,6 +56,7 @@ var Rift = (function () {
     //non destructive inserting method
     Rift.prototype.insert = function(other, index) {
         index = index % this.collection.length;
+        if(isNaN(index)) return false;
         this.collection.splice(index, 0, other);
         var elem = JSON.stringify(other);
         if(elem in this.collection) {
