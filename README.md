@@ -54,4 +54,61 @@ npm install riftjs
 
 ##Usage
 
-A Rift object has many methods that can be used with it
+A Rift object has many methods that can be used with it, to make storage of data and elements quick and easy.
+
+First, you have to require the package, then create a Rift object.
+
+```
+var rjs = require("riftjs");
+
+var a = new rjs.Rift();
+```
+####`.repr()`:
+
+####`.display()`:
+
+####`.append(other)`:
+
+####`.appendarr(arr)`:
+
+####`.appendleft(elem)`:
+
+####`.insert(other, index)`:
+
+####`.contains(other)`:
+
+####`.count(other)`:
+
+####`.pop()`:
+
+####`.remove(other)`:
+
+####`.removeall(other)`:
+
+####`.setval(key, val)`:
+
+####`.set(key, val)`:
+
+####`.get(key)`:
+
+####`.indexOf(item)`:
+
+####`.index(num)`:
+
+####`.equals(other)`:
+
+####`.length()`:
+
+####`.slice(start, end)`:
+
+####`.printKeys()`:
+
+####`.printOrdered()`:
+
+####`.orderedCollection()`:
+
+##Example Usage
+
+```
+
+```
