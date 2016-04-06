@@ -1,8 +1,8 @@
-# RiftJS
+# RiftsJS
 
 ####The JavaScript Array transformed.
 
-RiftJS is a Node package that implements the Rift data structure, an extended `Javascript` array that combines the functionality of a Hashmap, Hashset, and Array or ordered collection into a single object. `RiftJS` does this by manipulating the fact that in JavaScript, arrays are implemented as objects, not fixed size memory, as in languages such as `Java` or `C`.
+RiftsJS is a Node package that implements the Rift data structure, an extended `Javascript` array that combines the functionality of a Hashmap, Hashset, and Array or ordered collection into a single object. `RiftJS` does this by manipulating the fact that in JavaScript, arrays are implemented as objects, not fixed size memory, as in languages such as `Java` or `C`.
 
 ####Arrays
 
@@ -46,10 +46,10 @@ This is why, the only objects Rifts cannot work with are straight javascript num
 
 ##Installation
 
-To install RiftJS, just use the Node Package Manager.
+To install RiftsJS, just use the Node Package Manager.
 
 ```
-npm install riftjs
+npm install riftsjs
 ```
 
 ##Usage

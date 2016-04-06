@@ -1,0 +1,97 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@3.3.12
+3 info using node@v5.5.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/Josh/WebstormProjects/RiftJS',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/Josh/.npm/riftjs/1.0.0/package.tgz not in flight; packing
+9 info lifecycle riftjs@1.0.0~prepublish: riftjs@1.0.0
+10 silly lifecycle riftjs@1.0.0~prepublish: no script for prepublish, continuing
+11 verbose tar pack [ '/Users/Josh/.npm/riftjs/1.0.0/package.tgz',
+11 verbose tar pack   '/Users/Josh/WebstormProjects/RiftJS' ]
+12 verbose tarball /Users/Josh/.npm/riftjs/1.0.0/package.tgz
+13 verbose folder /Users/Josh/WebstormProjects/RiftJS
+14 verbose addLocalTarball adding from inside cache /Users/Josh/.npm/riftjs/1.0.0/package.tgz
+15 silly cache afterAdd riftjs@1.0.0
+16 verbose afterAdd /Users/Josh/.npm/riftjs/1.0.0/package/package.json not in flight; writing
+17 verbose afterAdd /Users/Josh/.npm/riftjs/1.0.0/package/package.json written
+18 silly publish { name: 'riftjs',
+18 silly publish   version: '1.0.0',
+18 silly publish   description: 'The JavaScript Array transformed.',
+18 silly publish   main: 'Main.js',
+18 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+18 silly publish   repository:
+18 silly publish    { type: 'git',
+18 silly publish      url: 'git+https://github.com/jweinst1/RiftJS.git' },
+18 silly publish   keywords: [ 'collectiontype', 'array', 'object', 'data', 'utils' ],
+18 silly publish   author:
+18 silly publish    { name: 'Joshua Weinstein',
+18 silly publish      email: 'jweinst1@berkeley.edu',
+18 silly publish      url: 'https://github.com/jweinst1' },
+18 silly publish   license: 'MIT',
+18 silly publish   bugs: { url: 'https://github.com/jweinst1/RiftJS/issues' },
+18 silly publish   homepage: 'https://github.com/jweinst1/RiftJS#readme',
+18 silly publish   readme: '# RiftJS\n\n####The JavaScript Array transformed.\n\nRiftJS is a Node package that implements the Rift data structure, an extended `Javascript` array that combines the functionality of a Hashmap, Hashset, and Array or ordered collection into a single object. `RiftJS` does this by manipulating the fact that in JavaScript, arrays are implemented as objects, not fixed size memory, as in languages such as `Java` or `C`.\n\n####Arrays\n\nIn `JavaScript`, arrays are specialized objects that act as ordered collections, they arrange elements in a specific order, with accepting multiple elements of a particular type. However, arrays also have the object functionality of setting and getting values. Let\'s look at this example.\n\n```\n   var x = [1, 2, 3];\n   x.length\n=> 3\n   x["a"] = 3\n=> 3\n   x\n=> [ 1, 2, 3, a: 3 ]\n   x.length\n=> 3\n   x.pop()\n=> 3\n   x\n=> [ 1, 2, a: 3 ]\n```\n\nHere, although we assigned a string value to a number in the array, the `length` property only refers to the elements in the ordered part of the array, not the ones assigned with the `<name>[key] = <value>` format. Furthermore, the array methods, such as `pop()`, `push()`, and more only effect the ordered portion of arrays. RiftJS takes advantage of this aspect, by using the non-ordered portion of arrays to store string values of objects and inserted elements. This allows the `in` operator in javascript to check for elements in an array in one step time, as opposed to linear time.\n\nHowever, there is one acception to this separation. If a key in an array, is ever set with the string of an already present numerical index, that new value is placed as part of the ordered collection in the array. Here is an example.\n\n```\n   var x = [1, 2, 3]\n   x\n=> [ 1, 2, 3 ]\n   x["1"] = 55;\n=> 55\n   x\n=> [ 1, 55, 3 ]\n   x.pop()\n=> 3\n   x.pop()\n=> 55\n```\n\nThis is why, the only objects Rifts cannot work with are straight javascript numbers. Numbers must be wrapped in an object, array, or other form to be stringified properly.\n\n##Installation\n\nTo install RiftJS, just use the Node Package Manager.\n\n```\nnpm install riftjs\n```\n\n##Usage\n\nA Rift object has many methods that can be used with it, to make storage of data and elements quick and easy.\n\nFirst, you have to require the package, then create a Rift object.\n\n```\nvar rjs = require("riftjs");\n\nvar a = new rjs.Rift();\n```\n####`.repr()`:\n\nReturns the internal array, refered to as `this.collection`.\n\n####`.display()`:\n\nReturns the stringified version of the entire Rift object.\n\n####`.append(other)`:\n\nAppends other to the end of the rift, and also stringifies the input to be checked for inclusion in constant time.\n\n####`.appendarr(arr)`:\n\nDoes the same as the append method but does so for each member of a javascript array.\n\n####`.appendleft(elem)`:\n\nDoes the same as append but `unshift()`s the element to be placed at the zero position of the array.\n\n####`.insert(other, index)`:\n\nDoes the same as append but inserts the `other` argument at specific position in the collection. The index is always rounded to it\'s remainder of the ordered length of the collection. This means putting `60`, as the index with a collection of 3 elements will insert at the 0 position.\n\nIf index is `NaN`, this method will not insert and return  `false`.\n\n####`.contains(other)`:\n\nChecks if the `JSON.stringify()` of other is in the Rift. Very fast and easy to check for inclusion while returning ordered collection functionality.\n\n####`.count(other)`:\n\nIn a rift, every element string key has a `Node()` object attached to it, that holds a corrsepsonding value. As elements as appended, a count is always kept track along the way for each element. This makes counting elements an `O(1)` operation.\n\n####`.pop()`:\n\nRemoves and returns the last inserted element into the rift. Note: If an element no longer exists in the ordered portion of the array, it is also deleted from the hashed portion.\n\n####`.remove(other)`:\n\nRemoves one of `other` from the rift. Does not return the removed element.\n\n####`.removeall(other)`:\n\nRemoves all occurences of `other` in the rift.\n\n####`.setval(key, val)`:\n\nIf a `key` is already in the rift, this will set the value on it, to be referenced with `get()`. Does nothing if the key is not present in the rift.\n\n####`.set(key, val)`:\n\nSets a value to a key in the rift. If the key is not in the rift, it appends it to the collection. Example.\n\n```\n   var a = new Rift();\n   a.set({a:1}, 4)\n   a\n=> { type: \'rift\', collection: [ { a: 1 }, \'{"a":1}\': { count: 1, value: 4 } ] }\n   a.get({a:1})\n   4\n```\n\n####`.get(key)`:\n\nRetrieves the value for a key in the rift. If the key is not in the rift, returns false.\n\n####`.indexOf(item)`:\n\nGets the first numerical index of `item` in the rift. If `item` is not in the collection, returns false.\n\n####`.index(num)`:\n\nTakes a number as an input, and returns the element at that numerical index. If index is NaN, returns false.\n\n####`.equals(other)`:\n\nChecks if the current Rift is equal to the stringified version of another Rift. Order is taken into consideration for the comparison.\n\n####`.length()`:\n\nReturns the length of all keys in the rift, both numerical indexes, and string keys.\n\n####`.slice(start, end)`:\n\nReturns an array slice on the ordered collection portion of the rift.\n\n####`.printKeys()`:\n\nPrints all the keys of the entire rift. Uses `console.log`\n\n####`.printOrdered()`:\n\nPrints only the numerical indexes used in the ordered collection of the rift.\n\n####`.orderedCollection()`:\n\nReturns an array of the entire ordered collection of the Rift.\n\n##Example Usage\n\n```\n   var a = new Rift();\n   a\n=> { type: \'rift\', collection: [] }\n   a.append({f:3})\n   a.append({a:3})\n   a.append({a:2})\n   a\n=> { type: \'rift\',\n  collection: \n   [ { f: 3 },\n     { a: 3 },\n     { a: 2 },\n     \'{"f":3}\': { count: 1, value: null },\n     \'{"a":3}\': { count: 1, value: null },\n     \'{"a":2}\': { count: 1, value: null } ] }\n   a.contains({f:3})\n=> true\n   a.contains({f:2})\n=> false\n   a.contains({a:2})\n=> true\n   a.remove({a:3})\n=> true\n   a\n=> { type: \'rift\',\n  collection: \n   [ { f: 3 },\n     { a: 2 },\n     \'{"f":3}\': { count: 1, value: null },\n     \'{"a":2}\': { count: 1, value: null } ] }\n   a.remove({a:2})\n=> true\n   a.insert({A:55}, 1)\n   a\n=> { type: \'rift\',\n  collection: \n   [ { A: 55 },\n     { f: 3 },\n     \'{"f":3}\': { count: 1, value: null },\n     \'{"A":55}\': { count: 1, value: null } ] }\n```\n\n##License\n\nRiftJS is MIT licensed an open sourced.',
+18 silly publish   readmeFilename: 'README.md',
+18 silly publish   gitHead: '249cd8fc939f5b5b72f8f90a105a4ee86762aca8',
+18 silly publish   _id: 'riftjs@1.0.0',
+18 silly publish   _shasum: 'd1207da62c33e94d07bf734492fa5d3cdc52947d',
+18 silly publish   _from: '.' }
+19 verbose getPublishConfig undefined
+20 silly mapToRegistry name riftjs
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry uri https://registry.npmjs.org/riftjs
+24 verbose publish registryBase https://registry.npmjs.org/
+25 silly publish uploading /Users/Josh/.npm/riftjs/1.0.0/package.tgz
+26 verbose request uri https://registry.npmjs.org/riftjs
+27 verbose request sending authorization for write operation
+28 info attempt registry request try #1 at 2:28:33 PM
+29 verbose request using bearer token for auth
+30 verbose request id 8eda7bbd6f0f479f
+31 http request PUT https://registry.npmjs.org/riftjs
+32 http 403 https://registry.npmjs.org/riftjs
+33 verbose headers { 'content-type': 'application/json',
+33 verbose headers   'cache-control': 'max-age=300',
+33 verbose headers   'content-length': '100',
+33 verbose headers   'accept-ranges': 'bytes',
+33 verbose headers   date: 'Wed, 06 Apr 2016 21:28:33 GMT',
+33 verbose headers   via: '1.1 varnish',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'x-served-by': 'cache-lax1429-LAX',
+33 verbose headers   'x-cache': 'MISS',
+33 verbose headers   'x-cache-hits': '0',
+33 verbose headers   'x-timer': 'S1459978112.872005,VS0,VE230' }
+34 verbose request invalidating /Users/Josh/.npm/registry.npmjs.org/riftjs on PUT
+35 error publish Failed PUT 403
+36 verbose stack Error: you do not have permission to publish "riftjs". Are you logged in as the correct user? : riftjs
+36 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+36 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+36 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+36 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+36 verbose stack     at emitTwo (events.js:100:13)
+36 verbose stack     at Request.emit (events.js:185:7)
+36 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1082:10)
+36 verbose stack     at emitOne (events.js:95:20)
+36 verbose stack     at Request.emit (events.js:182:7)
+36 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+37 verbose statusCode 403
+38 verbose pkgid riftjs
+39 verbose cwd /Users/Josh/WebstormProjects/RiftJS
+40 error Darwin 14.5.0
+41 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+42 error node v5.5.0
+43 error npm  v3.3.12
+44 error code E403
+45 error you do not have permission to publish "riftjs". Are you logged in as the correct user? : riftjs
+46 error If you need help, you may report this error at:
+46 error     <https://github.com/npm/npm/issues>
+47 verbose exit [ 1, true ]
