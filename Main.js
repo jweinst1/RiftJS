@@ -170,7 +170,7 @@ var Rift = (function () {
     /*Returns the numerical indexed value, with the input of a number type.
      Returns false if the collection is empty, or the input is NaN*/
     Rift.prototype.index = function(num) {
-        num = num % this.collection.length;
+        num %= this.collection.length;
         if(isNaN(num)) {
             return false;
         }
