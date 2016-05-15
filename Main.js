@@ -24,7 +24,7 @@ var Rift = (function () {
         return this.collection;
     };
     Rift.prototype.display = function() {
-        return JSON.stringify(this.colleciton);
+        return JSON.stringify(this.collection);
     };
     Rift.prototype.append = function(other) {
         this.collection.push(other);
@@ -213,4 +213,3 @@ var Rift = (function () {
 })();
 
 exports.Rift = Rift;
-
