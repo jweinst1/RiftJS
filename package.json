@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/jweinst1/RiftJS/issues"
   },
-  "homepage": "https://github.com/jweinst1/RiftJS#readme"
+  "homepage": "https://github.com/jweinst1/RiftJS#readme",
+  "dependencies": {
+    "nodeunit": "^0.9.1"
+  }
 }
