@@ -179,8 +179,7 @@ var Rift = (function () {
         }
     };
     Rift.prototype.equals = function(other) {
-        var result = JSON.stringify(this) === JSON.stringify(other);
-        return result;
+        return JSON.stringify(this) === JSON.stringify(other);
     };
     //gets the length of entire collection, not just indexed items
     Rift.prototype.length = function() {
