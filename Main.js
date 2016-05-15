@@ -42,6 +42,13 @@ var Rift = (function () {
             this.append(arr[i]);
         }
     };
+    //appends all elements of a rift object to the collection
+    Rift.prototype.appendrift = function(rift) {
+        var collec = rift.repr();
+        for(var i=0;i<collec.length;i++) {
+            this.append(collec[i]);
+        }
+    };
     //appends new element to the first index, or left side
     Rift.prototype.appendleft = function(other) {
         this.collection.unshift(other);
