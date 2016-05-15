@@ -190,8 +190,8 @@ var Rift = (function () {
         return total;
     };
     Rift.prototype.slice = function(start, end) {
-        end = end % this.collection.length;
-        start = start % this.collection.length;
+        end %= this.collection.length;
+        start %= this.collection.length;
         if(isNaN(start) || isNaN(end)) {
             return false;
         }
