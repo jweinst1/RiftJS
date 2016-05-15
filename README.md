@@ -2,11 +2,11 @@
 
 ####The JavaScript Array transformed.
 
-RiftsJS is a Node package that implements the Rift data structure, an extended `Javascript` array that combines the functionality of a Hashmap, Hashset, and Array or ordered collection into a single object. `RiftJS` does this by manipulating the fact that in JavaScript, arrays are implemented as objects, not fixed size memory, as in languages such as `Java` or `C`.
+RiftsJS is a Node package that implements the Rift data structure, an extended `JavaScript` array that combines the functionality of a HashMap, HashSet, and array or ordered collection into a single object. `RiftJS` does this by manipulating the fact that in JavaScript, arrays are implemented as objects, not fixed size memory, as in languages such as `Java` or `C`.
 
 ####Arrays
 
-In `JavaScript`, arrays are specialized objects that act as ordered collections, they arrange elements in a specific order, with accepting multiple elements of a particular type. However, arrays also have the object functionality of setting and getting values. Let's look at this example.
+In `JavaScript`, arrays are specialized objects that act as ordered collections. They arrange elements in a specific order with accepting multiple elements of a particular type. However, arrays also have the object functionality of setting and getting values. Let's look at this example.
 
 ```
    var x = [1, 2, 3];
@@ -26,7 +26,7 @@ In `JavaScript`, arrays are specialized objects that act as ordered collections,
 
 Here, although we assigned a string value to a number in the array, the `length` property only refers to the elements in the ordered part of the array, not the ones assigned with the `<name>[key] = <value>` format. Furthermore, the array methods, such as `pop()`, `push()`, and more only effect the ordered portion of arrays. RiftJS takes advantage of this aspect, by using the non-ordered portion of arrays to store string values of objects and inserted elements. This allows the `in` operator in javascript to check for elements in an array in one step time, as opposed to linear time.
 
-However, there is one acception to this separation. If a key in an array, is ever set with the string of an already present numerical index, that new value is placed as part of the ordered collection in the array. Here is an example.
+However, there is one exception to this separation. If a key in an array, is ever set with the string of an already present numerical index, that new value is placed as part of the ordered collection in the array. Here is an example.
 
 ```
    var x = [1, 2, 3]
@@ -46,10 +46,10 @@ This is why, the only objects Rifts cannot work with are straight javascript num
 
 ##Installation
 
-To install RiftsJS, just use the Node Package Manager.
+To install RiftJS, just use the Node Package Manager.
 
 ```
-npm install riftsjs
+npm install riftjs
 ```
 
 ##Usage
@@ -85,7 +85,7 @@ Does the same as append but `unshift()`s the element to be placed at the zero po
 
 ####`.insert(other, index)`:
 
-Does the same as append but inserts the `other` argument at specific position in the collection. The index is always rounded to it's remainder of the ordered length of the collection. This means putting `60`, as the index with a collection of 3 elements will insert at the 0 position.
+Does the same as append but inserts the `other` argument at specific position in the collection. The index is always rounded to its remainder of the ordered length of the collection. This means putting `60`, as the index with a collection of 3 elements will insert at the 0 position.
 
 If index is `NaN`, this method will not insert and return  `false`.
 
@@ -173,7 +173,7 @@ Returns an array of the entire ordered collection of the Rift.
    a.append({a:2})
    a
 => { type: 'rift',
-  collection: 
+  collection:
    [ { f: 3 },
      { a: 3 },
      { a: 2 },
@@ -190,7 +190,7 @@ Returns an array of the entire ordered collection of the Rift.
 => true
    a
 => { type: 'rift',
-  collection: 
+  collection:
    [ { f: 3 },
      { a: 2 },
      '{"f":3}': { count: 1, value: null },
@@ -200,7 +200,7 @@ Returns an array of the entire ordered collection of the Rift.
    a.insert({A:55}, 1)
    a
 => { type: 'rift',
-  collection: 
+  collection:
    [ { A: 55 },
      { f: 3 },
      '{"f":3}': { count: 1, value: null },
@@ -209,4 +209,4 @@ Returns an array of the entire ordered collection of the Rift.
 
 ##License
 
-RiftJS is MIT licensed an open sourced.
+RiftJS is MIT licensed and open sourced.
