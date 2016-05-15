@@ -116,6 +116,7 @@ var Rift = (function () {
                 }
             }
         }
+        return false;
     };
     /*Deletes all occurences of other in the collection*/
     Rift.prototype.removeall = function(other) {
