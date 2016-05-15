@@ -80,7 +80,7 @@ var Rift = (function () {
     Rift.prototype.count = function(other) {
         var elem = JSON.stringify(other);
         if(elem in this.collection) {
-            return this.collection[other].count;
+            return this.collection[elem].count;
         }
         else {
             return 0;
