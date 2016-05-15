@@ -166,7 +166,6 @@ var Rift = (function () {
                 return i;
             }
         }
-        return false;
     };
     /*Returns the numerical indexed value, with the input of a number type.
      Returns false if the collection is empty, or the input is NaN*/
