@@ -107,7 +107,7 @@ var Rift = (function () {
             if(JSON.stringify(this.collection[i]) === removed) {
                 this.collection.splice(i, 1);
                 if(this.collection[removed].count > 1) {
-                    this.collection[removed] -= 1;
+                    this.collection[removed].count -= 1;
                     return true;
                 }
                 else {
