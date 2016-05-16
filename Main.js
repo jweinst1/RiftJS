@@ -24,7 +24,7 @@ var Rift = (function () {
         return this.collection;
     };
     Rift.prototype.display = function() {
-        return JSON.stringify(this.colleciton);
+        return JSON.stringify(this.collection);
     };
     Rift.prototype.append = function(other) {
         this.collection.push(other);
@@ -42,6 +42,13 @@ var Rift = (function () {
             this.append(arr[i]);
         }
     };
+    //appends all elements of a rift object to the collection
+    Rift.prototype.appendrift = function(rift) {
+        var collec = rift.repr();
+        for(var i=0;i<collec.length;i++) {
+            this.append(collec[i]);
+        }
+    };
     //appends new element to the first index, or left side
     Rift.prototype.appendleft = function(other) {
         this.collection.unshift(other);
@@ -55,7 +62,7 @@ var Rift = (function () {
     };
     //non destructive inserting method
     Rift.prototype.insert = function(other, index) {
-        index = index % this.collection.length;
+        index %= this.collection.length;
         if(isNaN(index)) return false;
         this.collection.splice(index, 0, other);
         var elem = JSON.stringify(other);
@@ -73,7 +80,7 @@ var Rift = (function () {
     Rift.prototype.count = function(other) {
         var elem = JSON.stringify(other);
         if(elem in this.collection) {
-            return this.collection[other].count;
+            return this.collection[elem].count;
         }
         else {
             return 0;
@@ -100,7 +107,7 @@ var Rift = (function () {
             if(JSON.stringify(this.collection[i]) === removed) {
                 this.collection.splice(i, 1);
                 if(this.collection[removed].count > 1) {
-                    this.collection[removed] -= 1;
+                    this.collection[removed].count -= 1;
                     return true;
                 }
                 else {
@@ -109,6 +116,7 @@ var Rift = (function () {
                 }
             }
         }
+        return false;
     };
     /*Deletes all occurences of other in the collection*/
     Rift.prototype.removeall = function(other) {
@@ -158,12 +166,11 @@ var Rift = (function () {
                 return i;
             }
         }
-        return false;
     };
     /*Returns the numerical indexed value, with the input of a number type.
      Returns false if the collection is empty, or the input is NaN*/
     Rift.prototype.index = function(num) {
-        num = num % this.collection.length;
+        num %= this.collection.length;
         if(isNaN(num)) {
             return false;
         }
@@ -172,8 +179,7 @@ var Rift = (function () {
         }
     };
     Rift.prototype.equals = function(other) {
-        var result = JSON.stringify(this) === JSON.stringify(other);
-        return result;
+        return JSON.stringify(this) === JSON.stringify(other);
     };
     //gets the length of entire collection, not just indexed items
     Rift.prototype.length = function() {
@@ -184,8 +190,8 @@ var Rift = (function () {
         return total;
     };
     Rift.prototype.slice = function(start, end) {
-        end = end % this.collection.length;
-        start = start % this.collection.length;
+        end %= this.collection.length;
+        start %= this.collection.length;
         if(isNaN(start) || isNaN(end)) {
             return false;
         }
@@ -213,4 +219,3 @@ var Rift = (function () {
 })();
 
 exports.Rift = Rift;
-
